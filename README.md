@@ -18,7 +18,7 @@ The Query created for this report pulls the last result for each volunteer sign-
 
 There is also a version of the Query that will be used for additional reports that adds columns for Future_Week and counts Scheduled events.
 
-
+https://github.com/GloGuldager/GDDataPipelineProject/blob/master/FlakeRateQuery
 
 ## Pipeline Setup
 What tools do you plan to use?
