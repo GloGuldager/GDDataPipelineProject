@@ -25,7 +25,7 @@ The Pipeline BigQuery/DNC Phoenix (holds synced VAN data), DNC Portal, Google Sh
 What QA (or other sanity) checks would you add to ensure the pipeline is working as intended?
 Periodically run an Events Participation report out of VAN to check totals for a day/week. 
 
-![Pipeline] (FlakeRatePipeline.png)
+![Pipeline](FlakeRatePipeline.png)
 
 
 ## Data Studio Visualization
