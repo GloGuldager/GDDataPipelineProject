@@ -9,10 +9,9 @@ In this capacity I work on the data team and have been asked to create a Flake R
 In addition, we will build on this report in the coming weeks to redo PTG goals and metrics based on newly defined regions and turf as well as other contact methods.
 
 ## Data sources
-The data source used for this report is from the Minnesota DFL VAN MyCampaign Events Signup and related data tables to pull the source data and lists, specifically phonebank volunteer shift signups. This data is synced with the DNC Phoenix/Big Query on a daily basis and so the actual data source tables are located in Big Query.
+The data source used for this report is from the Minnesota DFL VAN MyCampaign Events Signup and related data tables to pull the source data and lists, specifically phonebank volunteer shift signups. This data is synced with the DNC Phoenix/Big Query on a daily basis and so the actual data source tables are located in Big Query. Future iterations created for PTG and other metrics will also use Activity and Turf tables.
 
-
-
+![VanSyncTable](MNBigQueryVanSyncTable.png)
 
 ## Query
 
