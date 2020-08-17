@@ -55,7 +55,7 @@ Using the available data sources listed above, we build a Data Lake available on
 ## Data Studio Visualization
 
 
-![DFLBrand](https://drive.google.com/open?id=14qKJKibqhM_RrVlHhF_d_aJnAejLWddJ)
+![DFLBrand](DFLBrand.png)
 
 I94 Immigration Data: This data comes from the US National Tourism and Trade Office Source. This data records immigration records partitioned by month of every year.
 World temperature Data: This dataset comes from Kaggle Source. Includes temperature recordings of cities around the world for a period of time
