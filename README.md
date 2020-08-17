@@ -9,13 +9,14 @@ In this capacity I work on the data team and have been asked to create a Flake R
 In addition, we will build on this report in the coming weeks to redo PTG goals and metrics based on newly defined regions and turf as well as other contact methods.
 
 ## Data sources
-The data source used for this report is from the Minnesota DFL VAN MyCampaign Events Signup and related data tables to pull the source data and lists, specifically phonebank volunteer shift signups. This data is synced with the DNC Phoenix/Big Query on a daily basis and so the actual data source tables are located in Big Query. Future iterations created for PTG and other metrics will also use Activity and Turf tables.
+The data source used for this report is from the Minnesota DFL VAN MyCampaign Events Signup and related data tables to pull the source data and lists, specifically phonebank volunteer shift signups. This data is synced with the DNC Phoenix/BigQuery on a daily basis and so the actual data source tables are located in BigQuery. We are specifically pulling from the vansync_derived_mn table that contains data for the most recent update per volunteer sign-up so that we know we are getting the final result. Future iterations created for PTG and other metrics will also use Activity and Turf tables.
 
 ![VanSyncTable](MNBigQueryVanSyncTable.png)
 
 ## Query
+The Query created for this report pulls the last result for each volunteer sign-up by event_date and from that result categorizes by event_location_id (our region), by week (we count weeks from Saturday to Friday), defines Current_Week, and counts No_Show, Cancelled, Completed, Total_Flakes, Total sign-ups, and the Flake_Rate.
 
-
+There is also a version of the Query that will be used for additional reports that adds columns for Future_Week and counts Scheduled events.
 
 
 
@@ -58,30 +59,7 @@ At this point, I have all of the data, query, pipeline components, automation an
 
 
 
-I94 Immigration Data: This data comes from the US National Tourism and Trade Office Source. This data records immigration records partitioned by month of every year.
-World temperature Data: This dataset comes from Kaggle Source. Includes temperature recordings of cities around the world for a period of time
-US City Demographic Data: This dataset comes from OpenSoft Source. Includes population formation of US states, like race and gender.
-Aiport Code table: Source. Includes a collection of airport codes and their respective cities, countries around the world.
-Data Lake Star Schema designs
-The decision to build a Data Lake on S3 is due to:
-Ease of schema design, rely on schema-on-read
-Flexibility in adding / removing additional data
-Availability to a wide range of users with access to the S3 bucket
-Table designs
-Normalized us city: built on city code data from raw airport and demographics data
-Normalized us airport: built on raw airport data, filtered for US airports, joined with city table to get city_id
-Each airport can either be identified by icao_code or iata_code or both
-Normalized country: built on country codes from I94 immigration dictionary
-Normalized us state code: built on state codes from I94 immigration dictionary
-Normalized us weather: built on global weather data, filtered for US cities, joined with city table to get city_id
-Filtered for weather data in the US at the latest date
-The raw weather data only has temperatures on a fraction of all the cities in the US
-Some cities in the data are duplicates, but that means they're on different states of the US. However the state is not available in the data, but instead we have the latitude - longitude coordinates. This issue is currently NOT addressed in this project, but in a production setting,we should join the latitude - longitude from weather dataset with this data, which includes city coordinates and their respective states
-Normalized us demographics: built on raw demographics data, not much transform is needed
-Denormalized airport weather: Joining weather data with airport location, to get the respective weather information for each US airports
-Normalized immigrant: Information about individual immigrants, like age, gender, occupation, visa type, built on I94 Immigration dataset
-Normalized immigration table: Information about immigration information, such as date of arrival, visa expiry date, airport, means of travel
-Denormalized immigration demographics: Joining immigration with demographics data, to get the population of places where immigrants go
+
 AWS Infrastructure
 The AWS infrastructure is set up according to this tutorial
 Upload the CloudFormation script to create the resources, such as EC2 instance, RSD database for Airflow, security groups, S3 bucket
