@@ -1,0 +1,62 @@
+select 
+  event_date                                                                                            as Event_Date,
+  case
+    when  (event_location_id = '13670'
+           or event_location_id = '13614')                     then 'CD1'    
+    when  event_location_id = '13615'                          then 'CD2'
+    when  event_location_id = '13616'                          then 'CD3'
+    when  event_location_id = '13617'                          then 'CD4'
+    when  event_location_id = '13618'                          then 'CD5'
+    when  event_location_id = '13619'                          then 'CD6'
+    when  event_location_id = '13620'                          then 'CD7'
+    when  event_location_id = '13621'                          then 'CD8'
+  end as Location,
+  case
+    when event_date between '2020-07-11' and '2020-07-17'     then 'Week 01: 07/11/20 - 07/17/20'
+    when event_date between '2020-07-18' and '2020-07-24'     then 'Week 02: 07/18/20 - 07/24/20'
+    when event_date between '2020-07-25' and '2020-07-31'     then 'Week 03: 07/25/20 - 07/31/20'
+    when event_date between '2020-08-01' and '2020-08-07'     then 'Week 04: 08/01/20 - 08/07/20'
+    when event_date between '2020-08-08' and '2020-08-14'     then 'Week 05: 08/08/20 - 08/14/20'
+    when event_date between '2020-08-15' and '2020-08-21'     then 'Week 06: 08/15/20 - 08/21/20'
+    when event_date between '2020-08-22' and '2020-08-28'     then 'Week 07: 08/22/20 - 08/28/20'
+    when event_date between '2020-08-29' and '2020-09-04'     then 'Week 08: 08/29/20 - 09/04/20'
+    when event_date between '2020-09-05' and '2020-09-11'     then 'Week 09: 09/05/20 - 09/11/20'
+    when event_date between '2020-09-12' and '2020-09-18'     then 'Week 10: 09/12/20 - 09/18/20'
+    when event_date between '2020-09-19' and '2020-09-25'     then 'Week 11: 09/19/20 - 09/25/20'
+    when event_date between '2020-09-26' and '2020-10-02'     then 'Week 12: 09/26/20 - 10/02/20'
+    when event_date between '2020-10-03' and '2020-10-09'     then 'Week 13: 10/03/20 - 10/09/20'
+    when event_date between '2020-10-10' and '2020-10-16'     then 'Week 14: 10/10/20 - 10/16/20'
+    when event_date between '2020-10-17' and '2020-10-23'     then 'Week 15: 10/17/20 - 10/23/20'
+    when event_date between '2020-10-24' and '2020-10-30'     then 'Week 16: 10/24/20 - 10/30/20'
+    when event_date >= '2020-10-31'                           then 'Week 17: 10/31/20 - 11/06/20'
+  end as Week,                         
+
+  case when extract(week(saturday) from event_date) = extract(week(saturday) from Current_Date) then 1 else 0 end as Current_Week,
+
+  sum(case when mrr_status_name = 'No Show' then 1 else 0 end)                                            as No_Show,
+  sum(case when mrr_status_name = 'Cancelled' then 1 else 0 end)                                          as Cancelled,
+  sum(case when mrr_status_name = 'Completed' then 1 else 0 end)                                          as Completed,
+  sum(case when mrr_status_name = 'No Show' or mrr_status_name = 'Cancelled' then 1 else 0 end)           as Total_Flakes,
+  sum(case when mrr_status_name = 'No Show' or mrr_status_name = 'Cancelled' 
+        or mrr_status_name = 'Completed' then 1 else 0 end)                                               as Total,
+  
+
+  round(ifnull((sum(case when mrr_status_name = 'No Show' or mrr_status_name = 'Cancelled' then 1 else 0 end))/
+  nullif(sum(case when mrr_status_name = 'No Show' or mrr_status_name = 'Cancelled' or mrr_status_name = 'Completed'
+  then 1 else 0 end), 0), 0), 2)                                                                          as Flake_Rate
+
+from 
+  `demscoord20.vansync_derived_mn.event_attendees`
+
+where 
+  event_name = 'Coord: Virtual Phone Bank'
+  and event_date >= "2020-07-11" 
+
+group by  
+  2,
+  1
+order by 
+  1,
+  2
+  
+  
