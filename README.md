@@ -1,42 +1,16 @@
-# GDDataPipelineProject
+# GD Data Pipeline Final Project
 
-## Project description
+## Project Description
 
-Flake	Rate:		The	rule	of	halves
-An	important	factor	in	volunteer	recruitment	is	understanding	the	“flake	rate.”		In	
-short,	50%	of	the	people	recruited	for	any	event,	phone	bank,	or	canvass,	will	not	
-show	up	as	promised.		Anticipating	the	50%	flake	rate,	and	working	to	minimize	
-its	impact,	is	critical	in	experiencing	success	in	volunteer	recruitment	efforts.
-Managing	the	flake	rate
-• Don’t	lie	to	yourself.		The	flake	rate	is	real.		Plan	accordingly.
-• If	you	need	a	specific	number	of	people,	recruit	twice	as	many	people	as	
-you	need.
-• Maybe	means	NO.		Counting	maybes	as	yes will	inflate	your	numbers.
-Reducing	the	flake	rate
-• Ask	people	to	bring	a	friend.	The	ones	who	succeed	will	balance	out	the	
-flake	factor.	
-• Assign	volunteers	to	bring	food,	napkins,	pencils,	whatever	you	may	need.
-This	will	make	them	feel	more	accountability	to	attend.
-• Have	a	“draw.”		Invite	someone	of	note	(like	a	local	elected	official)	to	give	
-opening	remarks	and	thank	volunteers	if	possible.
-• Reminder	Calls	should	be	made	24	hours	in	advance	as	well	as	reminder	emails.
-Reducing	the	future	flake	rate.	
-• Register	people	as	they	arrive.		Call	anyone	who	did	not	show, but	also	did	
-not	cancel.		Try	to	sign	them	up	for	something	else.		The	fact	that	you	
-demonstrate	that	you	know	they	didn’t	show	will	make	them	treat	you	
-more	seriously	in	the	future.	
+I am currently working as a DigiDem on the Minnesota Coordinated Campaign for the 2020 Campaign Cycle.
 
+In this capacity I work on the data team and have been asked to create a Flake Rate report for our field team so that they can track how many volunteers that are scheduled to do phone bank shifts actually complete these shifts. A general rule of thumb for flake rate is 50% of the people recruited for any event, phone bank, or canvass, will not show up as promised. The field team will be able to monitor this flake rate by week (current week is Saturday to today), region and organizer (eventually) so that they can better plan how many volunteers to recruit and monitor confirmation best practices.
 
-
-
-
-
-
-As more and more immigrants move to the US, people want quick and reliable ways to access certain information that can help inform their immigration, such as weather of the destination, demographics of destination. And for regulators to keep track of immigrants and their immigration meta data such as visa type, visa expire date, entry method to the US.
-
-Using the available data sources listed above, we build a Data Lake available on S3 that can be used to query for weather and demographics of popular immigration destinations, which could be useful for both immigrants and regulators. Regulators can also access data about individual immigrants, date of arrival to the US, visa expiry dates and method of entries to improve decision making.
+In addition, we will build on this report in the coming weeks to redo PTG goals and metrics based on newly defined regions and turf as well as other contact methods.
 
 ## Data sources
+The data source used for this report is from the Minnesota DFL VAN MyCampaign Events Signup and related data tables to pull the source data and lists, specifically phonebank volunteer shift signups. This data is synced with the DNC Phoenix/Big Query on a daily basis and so the actual data source tables are located in Big Query.
+
 
 
 
@@ -47,7 +21,10 @@ Using the available data sources listed above, we build a Data Lake available on
 
 
 ## Pipeline Setup
-
+What tools do you plan to use?
+BigQuery/DNC Phoenix (holds synced VAN data), DNC Portal, Google Sheets, Data Studio for Visualization/Dashboard
+What QA (or other sanity) checks would you add to ensure the pipeline is working as intended?
+Periodically run an Events Participation report out of VAN to check totals for a day/week. 
 
 
 
@@ -56,6 +33,31 @@ Using the available data sources listed above, we build a Data Lake available on
 
 
 ![DFLBrand](DFLBrand.png)
+
+
+
+Final Project Benchmark 3
+Gloria Guldager
+Pipeline Project: Field Team Organizer Flake Rate report for Volunteer Shifts Completed
+
+What is your plan to complete the project? 
+
+My plan to complete the project is to spend time on Monday tweeking my dashboard visualization and also create a draft of the slide deck and executive summary. Monday evening I have signed up for office hours with Shoham to address any final questions I have on my visualization.
+
+On Tuesday I will make final edits to the slide deck and executive summary. In addition I will practice my presentation to prepare for the evening presentation.
+
+At this point, I have all of the data, query, pipeline components, automation and the visualization dashboard created. I have tweeks I would like to make to the visualization and I need to create the slide deck and the executive summary.
+
+
+
+
+
+
+
+
+
+
+
 
 I94 Immigration Data: This data comes from the US National Tourism and Trade Office Source. This data records immigration records partitioned by month of every year.
 World temperature Data: This dataset comes from Kaggle Source. Includes temperature recordings of cities around the world for a period of time
