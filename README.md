@@ -21,83 +21,27 @@ There is also a version of the Query that will be used for additional reports th
 https://github.com/GloGuldager/GDDataPipelineProject/blob/master/FlakeRateQuery
 
 ## Pipeline Setup
-The Pipeline BigQuery/DNC Phoenix (holds synced VAN data), DNC Portal, Google Sheets, Data Studio for Visualization/Dashboard
-What QA (or other sanity) checks would you add to ensure the pipeline is working as intended?
-Periodically run an Events Participation report out of VAN to check totals for a day/week. 
+The Pipeline starts with event data being captured in VAN Votebuilder. The organizers update this information for the volunteers after all of their shifts each day. All of the VAN tables are synced daily to BigQuery/DNC Phoenix where the query is written to pull the event sign-ups as well as the most recent status for each volunteer. The Query is copied and placed in a job on the DNC Portal. This is where the query is scheduled to run daily (or at whatever interval is desired) and the Google Sheet is defined where the results from the query will be placed after each refresh. This Google Sheet becomes the data source for a Dashboard and Visualizations in Data Studio.
+
+To ensure that my pipeline is working as intended, I will occasionally run Events Participations reports from Votebuilder to check totals for a particular day/week or by region. 
 
 ![Pipeline](FlakeRatePipeline.png)
 
-
 ## Data Studio Visualization
+A pivot table and a line chart were created to show the totals and the flake rate by week and region. The most recent or current week displays data that may be for a partial week. Organizing weeks run from Saturday to Friday. In the near future, the visualization will be updated to reflect new region and turf designations as well as the ability to display by organizer, if desired.
 
+The visualization was designed to reflect the current branding protocols of the organization including the logo and color scheme.
 
 ![DFLBrand](DFLBrand.png)
 
+The completed Dashboard may be viewed at this URL.
 
-
-Final Project Benchmark 3
-Gloria Guldager
-Pipeline Project: Field Team Organizer Flake Rate report for Volunteer Shifts Completed
-
-What is your plan to complete the project? 
-
-My plan to complete the project is to spend time on Monday tweeking my dashboard visualization and also create a draft of the slide deck and executive summary. Monday evening I have signed up for office hours with Shoham to address any final questions I have on my visualization.
-
-On Tuesday I will make final edits to the slide deck and executive summary. In addition I will practice my presentation to prepare for the evening presentation.
-
-At this point, I have all of the data, query, pipeline components, automation and the visualization dashboard created. I have tweeks I would like to make to the visualization and I need to create the slide deck and the executive summary.
+https://datastudio.google.com/reporting/c9776d59-d434-4d83-b8a3-37f0194ef82c
 
 
 
 
 
-
-
-
-
-
-
-
-
-AWS Infrastructure
-The AWS infrastructure is set up according to this tutorial
-Upload the CloudFormation script to create the resources, such as EC2 instance, RSD database for Airflow, security groups, S3 bucket
-Then connect to the EC2 instance:
-sudo su
-cd ~/airflow
-source ~/.bash_profile
-bash start.sh
-bash run_dags.sh
-ETL
-dag_cluster: start the EMR cluster, and wait for all data transformation is finished, then terminate the cluster
-alt text
-
-dag_normalize: wait for EMR cluster to be ready, then use Apache Livy REST API to create interactive Spark session on the cluster, submit a Spark script to read data from S3, do transformation and write the output to S3
-This DAG handles normalized tables
-alt text
-
-dag_analytics: wait for EMR cluster to be ready, and that normalized tables are processed, then read normalized tables to create analytics tables, and write to S3
-This DAG handles immigration data, which is partitioned for 12 months from jan-2016 to dec-2016
-To re-run this DAG, change the DAG name, then delete the existing DAG from Airflow, and refresh the UI
-alt text
-
-Possible errors
-Livy session NOT started, restart EMR, restart Airflow scheduler
-Scenarios
-Data increase by 100x. read > write. write > read
-
-Redshift: Analytical database, optimized for aggregation, also good performance for read-heavy workloads
-Cassandra: Is optimized for writes, can be used to write online transactions as it comes in, and later aggregated into analytics tables in Redshift
-Increase EMR cluster size to handle bigger volume of data
-Pipelines would be run on 7am daily. how to update dashboard? would it still work?
-
-DAG retries, or send emails on failures
-daily intervals with quality checks
-if checks fail, then send emails to operators, freeze dashboard, look at DAG logs to figure out what went wrong
-Make it available to 100+ people
-
-Redshift with auto-scaling capabilities and good read performance
-Cassandra with pre-defined indexes to optimize read queries
 
 
 
