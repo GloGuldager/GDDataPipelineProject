@@ -21,8 +21,7 @@ There is also a version of the Query that will be used for additional reports th
 https://github.com/GloGuldager/GDDataPipelineProject/blob/master/FlakeRateQuery
 
 ## Pipeline Setup
-What tools do you plan to use?
-BigQuery/DNC Phoenix (holds synced VAN data), DNC Portal, Google Sheets, Data Studio for Visualization/Dashboard
+The Pipeline BigQuery/DNC Phoenix (holds synced VAN data), DNC Portal, Google Sheets, Data Studio for Visualization/Dashboard
 What QA (or other sanity) checks would you add to ensure the pipeline is working as intended?
 Periodically run an Events Participation report out of VAN to check totals for a day/week. 
 
